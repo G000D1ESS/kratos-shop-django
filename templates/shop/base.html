@@ -1,3 +1,4 @@
+{% load bootstrap5 %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -5,11 +6,28 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap 5 -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <!-- Stylesheets -->
+    {% block css %}{% endblock %}
+    <!-- Scripts -->
+    {% block javascript %}{% endblock %}
     <title>{% block title %}Kratos{% endblock %}</title>
 </head>
 <body>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+    {% block header %}
+    <header></header>
+    {% endblock %}
+
+    {% block main %}
+    <main role="main">
+    </main>
+    {% endblock %}
+
+    {% block footer %}
+    <footer></footer>
+    {% endblock %}
+
 </body>
 </html>

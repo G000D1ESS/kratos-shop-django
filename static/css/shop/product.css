@@ -1,3 +1,14 @@
-main {
-    padding-top: 100px;
+
+.product {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.product-content {
+    padding-top: 20px;
+}
+
+#carouselImages img {
+    height: 400px;
+    object-fit: contain;
 }

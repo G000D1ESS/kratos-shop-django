@@ -12,37 +12,44 @@
 {% block title %}{{ product.name | title }}{% endblock %}
 
 {% block header %}
+<header>
     {% show_menu 'main' %}
+</header>
 {% endblock %}
 
+
 {% block main %}
-<div class="container">
-    <h1>Товар - {{ product.name }}</h1>
-    {% if product.is_aviable %}
-        <div id="stock">Товар в наличии</div>
-        <div id="price">{{ product.price | intcomma }}₽</div>
-    {% else %}
-        <div id="stock">Товар недоступен</div>
-    {% endif %}
-    <p id="sku">Артикул: {{ product.sku | watermark }}</p>
-    <div id="carouselProductImages" class="carousel carousel-dark slide col-8" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for image in product.images.all %}
-            <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                <img src="{{ image.url }}" class="d-block w-100">
+<main role="main">
+    <div class="container product">
+        <div class="row product-title">
+            <div class="col">
+                <h1 class="text-center"><strong>{{ product.name }}</strong></h1>
+                <hr>
+                <div class="breadcrumbs">
+                </div>
             </div>
-            {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#carouselProductImages" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Предыдущее</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselProductImages" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Следующее</span>
-        </a>
+        <div class="row product-content">
+            <div class="col-8">
+                {% image_slider product.images.all %}
+            </div>
+            <div class="col-4">
+                <h2 class="product-price">
+                    <span id="price"><strong>{{ product.price | intcomma }}₽</strong></span>
+                </h2>
+                <p class="prop-key">Артикул: <span class="prop-value">{{ product.sku | watermark }}</span></p>
+                {% if product.is_aviable %}
+                    {% bootstrap_button content="Добавить в корзину" button_class="btn-primary" size="large" %}
+                {% else %}
+                    {% bootstrap_button content="Нет в наличии" button_class="btn-outline-secondary" size="large" extra_classes="disabled" %}
+                {% endif %}
+            </div>
+        </div>
     </div>
-</div>
+</main>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
 
 
