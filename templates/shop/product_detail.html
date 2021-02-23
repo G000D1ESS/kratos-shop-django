@@ -1,0 +1,48 @@
+{% extends "shop/base.html" %}
+{% load bootstrap5 %}
+{% load humanize %}
+{% load static %}
+{% load menu %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/shop/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/shop/product.css' %}">
+{% endblock %}
+
+{% block title %}{{ product.name | title }}{% endblock %}
+
+{% block header %}
+    {% show_menu 'main' %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1>Товар - {{ product.name }}</h1>
+    {% if product.is_aviable %}
+        <div id="stock">Товар в наличии</div>
+        <div id="price">{{ product.price | intcomma }}₽</div>
+    {% else %}
+        <div id="stock">Товар недоступен</div>
+    {% endif %}
+    <p id="sku">Артикул: {{ product.sku | watermark }}</p>
+    <div id="carouselProductImages" class="carousel carousel-dark slide col-8" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for image in product.images.all %}
+            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <img src="{{ image.url }}" class="d-block w-100">
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselProductImages" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Предыдущее</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselProductImages" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Следующее</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+
