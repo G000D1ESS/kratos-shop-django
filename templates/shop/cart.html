@@ -1,0 +1,41 @@
+{% extends "shop/base.html" %}
+{% load bootstrap5 %}
+{% load humanize %}
+{% load static %}
+{% load menu %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/shop/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/shop/cart.css' %}">
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/shop/cart.js' %}"></script>
+{% endblock %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block header %}
+<header>
+    {% show_menu 'main' %}
+</header>
+{% endblock %}
+
+
+{% block main %}
+<main role="main">
+    <div class="container cart">
+        <h1>Корзина: </h1>
+        <hr>
+        <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - {{ product.price }} ₽</li>
+        {% endfor %}
+        </ul>
+        <a class="btn btn-primary offer">Оформть заказ</a>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
