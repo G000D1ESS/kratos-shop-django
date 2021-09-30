@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 
@@ -37,6 +38,14 @@ class CartPage(TemplateView):
             context['products'].append(product)
         return context
 
-class ProductDetail(DetailView):
 
+class ProductDetail(DetailView):
     model = Product
+
+
+class SearchPage(TemplateView):
+
+    template_name = 'shop/search.html'
+
+    def get(self, reqeust, query):
+        return self.render_to_response(context={'products': get_list_or_404(Product.objects.filter(name__icontains=query))})
