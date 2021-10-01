@@ -1,5 +1,3 @@
-import json
-
 from django.core.mail import send_mail
 
 from .apps import celery_app as app
@@ -15,7 +13,7 @@ def send_offer(offer):
     message = 'Вы заказали:\n'
     for product in offer:
         message += f'{product["name"]} - {product["price"]} ₽\n'
-        total_price += product["price"]
+        total_price += product['price']
     message += '-'*10 + '\n'
     message += f'Финальная стоимость: {total_price} ₽'
 

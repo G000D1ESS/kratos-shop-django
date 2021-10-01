@@ -1,5 +1,3 @@
-import os
-
 from suit.apps import DjangoSuitConfig
 
 from celery import Celery

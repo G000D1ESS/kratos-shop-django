@@ -33,7 +33,7 @@ class Product(models.Model):
 
     @property
     def is_aviable(self):
-        return (self.stock>0) & self.aviable
+        return (self.stock > 0) & self.aviable
 
     def show_price(self):
         return f'{self.price} ₽'
@@ -52,6 +52,9 @@ class Image(models.Model):
     @property
     def url(self):
         return self.image.url
+
+    def __str__(self):
+        return self.url
 
     class Meta:
         pass
