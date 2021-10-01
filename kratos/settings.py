@@ -1,6 +1,13 @@
 import os
+from os import getenv as env
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+# Take environment variables from .env
+load_dotenv()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'kratos.settings')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,14 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mt!%7&m&6&sp9=@p7(1st1*rkwf7_o2%4=e2x^myjauknz8n(^'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
+DEBUG = True
+SECRET_KEY = 'mt!%7&m&6&sp9=@p7(1st1*rkwf7_o2%4=e2x^myjauknz8n(^'
 
 
 # Application definition
@@ -112,10 +114,9 @@ CELERY_BROKER_URL = 'redis://0.0.0.0:6379/0'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = env('EMAIL_LOGIN')
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = ''
 EMAIL_TIMEOUT = 60
 
 
@@ -123,13 +124,9 @@ EMAIL_TIMEOUT = 60
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'ru-ru'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
