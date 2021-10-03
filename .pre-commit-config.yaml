@@ -14,3 +14,7 @@ repos:
       - id: flake8
         args: ['--config=.flake8']
         exclude: 'migrations'
+  - repo: 'https://github.com/timothycrosley/isort'
+    rev: 5.7.0
+    hooks:
+      - id: isort
