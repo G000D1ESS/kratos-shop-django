@@ -7,11 +7,11 @@ class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     title = models.CharField(max_length=30)
     products = models.ManyToManyField('Product', blank=True)
-    aviable = models.BooleanField(default=True, blank=True)
+    available = models.BooleanField(default=True, blank=True)
 
     @property
-    def is_aviable(self):
-        return self.aviable
+    def is_available(self):
+        return self.available
 
     def __str__(self):
         return self.name
@@ -26,14 +26,14 @@ class Product(models.Model):
     sku = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
     stock = models.PositiveSmallIntegerField()
-    aviable = models.BooleanField(default=True, blank=True)
+    available = models.BooleanField(default=True, blank=True)
     price = models.PositiveSmallIntegerField()
     images = models.ManyToManyField('Image', blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     @property
-    def is_aviable(self):
-        return (self.stock > 0) & self.aviable
+    def is_available(self):
+        return (self.stock > 0) & self.available
 
     def show_price(self):
         return f'{self.price} ₽'

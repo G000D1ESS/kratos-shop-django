@@ -38,7 +38,7 @@
                     <span id="price"><strong>{{ product.price | intcomma }}₽</strong></span>
                 </h2>
                 <p class="prop-key">Артикул: <span class="prop-value">{{ product.sku | watermark }}</span></p>
-                {% if product.is_aviable %}
+                {% if product.is_available %}
                     {% bootstrap_button content="Добавить в корзину" button_class="btn-primary" size="large" %}
                 {% else %}
                     {% bootstrap_button content="Нет в наличии" button_class="btn-outline-secondary" size="large" extra_classes="disabled" %}
